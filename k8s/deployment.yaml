@@ -17,7 +17,7 @@ spec:
           image: ru44/kpress-k8s-app:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 3030
+            - containerPort: 3031
           resources:
             limits:
               memory: "512Mi"

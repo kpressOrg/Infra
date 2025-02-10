@@ -21,7 +21,7 @@ spec:
         service:
           type: LoadBalancer
           port: 80
-          targetPort: 3030
+          targetPort: 3031
         database:
           host: kpress-db.default.svc.cluster.local
           user: myuser

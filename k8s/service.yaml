@@ -9,7 +9,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 3030
+      targetPort: 3031
 
 ---
 apiVersion: v1
