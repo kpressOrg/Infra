@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kpress-app
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: helm
+    repoURL: 'https://github.com/ru44/kpress'
+    targetRevision: HEAD
+    helm:
+      values: |
+        replicaCount: 3
+        image:
+          repository: ru44/kpress-k8s-app
+          tag: "latest"
+        service:
+          type: LoadBalancer
+          port: 80
+          targetPort: 3030
+        database:
+          host: kpress-db.default.svc.cluster.local
+          user: myuser
+          password: mypassword
+          name: mydb
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kpress-k8s-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kpress-k8s-app
+  template:
+    metadata:
+      labels:
+        app: kpress-k8s-app
+    spec:
+      containers:
+        - name: kpress-k8s-app
+          image: ru44/kpress-k8s-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3030
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

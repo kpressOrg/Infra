@@ -1,0 +1,19 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: kpress-k8s-app
+deploy:
+  helm:
+    releases:
+      - name: kpress-release
+        chartPath: ../helm
+        valuesFiles:
+          - ../helm/values.yaml
+        setValues:
+          image.repository: ru44/kpress-k8s-app
+
+portForward:
+  - resourceType: service
+    resourceName: kpress-k8s-app
+    port: 80
+    localPort: 8080
