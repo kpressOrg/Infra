@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kpress-app-gateway
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kpress-app-gateway
+  template:
+    metadata:
+      labels:
+        app: kpress-app-gateway
+    spec:
+      containers:
+        - name: kpress-app-gateway
+          image: iru44/kpress-app-gateway:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3030
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

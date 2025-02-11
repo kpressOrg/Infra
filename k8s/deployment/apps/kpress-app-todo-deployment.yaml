@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kpress-app-todo-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kpress-app-todo-service
+  template:
+    metadata:
+      labels:
+        app: kpress-app-todo-service
+    spec:
+      containers:
+        - name: kpress-app-todo-service
+          image: iru44/kpress-app-todo-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3031
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

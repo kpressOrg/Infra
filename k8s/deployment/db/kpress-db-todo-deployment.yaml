@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kpress-db
+  name: kpress-db-todo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kpress-db
+      app: kpress-db-todo
   template:
     metadata:
       labels:
-        app: kpress-db
+        app: kpress-db-todo
     spec:
       containers:
-        - name: kpress-db
+        - name: kpress-db-todo
           image: postgres:latest
           env:
             - name: POSTGRES_USER
@@ -23,7 +23,7 @@ spec:
             - name: POSTGRES_DB
               value: "mydb"
           ports:
-            - containerPort: 5432
+            - containerPort: 5434
           resources:
             limits:
               memory: "512Mi"

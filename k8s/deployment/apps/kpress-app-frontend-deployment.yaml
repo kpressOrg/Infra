@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kpress-app-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kpress-app-frontend
+  template:
+    metadata:
+      labels:
+        app: kpress-app-frontend
+    spec:
+      containers:
+        - name: kpress-app-frontend
+          image: iru44/kpress-app-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4173
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

@@ -10,7 +10,7 @@ deploy:
         valuesFiles:
           - ../helm/values.yaml
         setValues:
-          image.repository: ru44/kpress-k8s-app
+          image.repository: iru44/kpress-k8s-app
 
 portForward:
   - resourceType: service

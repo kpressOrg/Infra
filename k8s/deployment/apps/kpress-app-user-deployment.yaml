@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kpress-app-user-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kpress-app-user-service
+  template:
+    metadata:
+      labels:
+        app: kpress-app-user-service
+    spec:
+      containers:
+        - name: kpress-app-user-service
+          image: iru44/kpress-app-user-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3033
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

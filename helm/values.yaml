@@ -6,14 +6,14 @@
 replicaCount: 3
 
 image:
-  repository: ru44/kpress-k8s-app
+  repository: iru44/kpress-k8s-app
   tag: "latest"
   pullPolicy: Always
 
 service:
   type: LoadBalancer
   port: 80
-  targetPort: 3031
+  targetPort: 3030
 
 database:
   host: "kpress-db"

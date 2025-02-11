@@ -10,13 +10,13 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     path: helm
-    repoURL: 'https://github.com/ru44/kpress'
+    repoURL: 'https://github.com/iru44/kpress'
     targetRevision: HEAD
     helm:
       values: |
         replicaCount: 3
         image:
-          repository: ru44/kpress-k8s-app
+          repository: iru44/kpress-k8s-app
           tag: "latest"
         service:
           type: LoadBalancer
