@@ -26,14 +26,14 @@ jobs:
         sudo mv kubeval /usr/local/bin/
 
     - name: Lint Kubernetes manifests
-      run: kubeval path/to/your/k8s/manifests
+      run: kubeval k8s/deployment/apps/*.yaml k8s/deployment/db/*.yaml k8s/service/*.yaml
 
     - name: Install Helm
       run: |
         curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
     - name: Lint Helm charts
-      run: helm lint path/to/your/helm/chart
+      run: helm lint helm
 
     - name: Install Terraform
       run: |

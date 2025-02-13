@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kpress-app-gateway
+  name: kpress-app-gateway-service
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: kpress-app-gateway
+      app: kpress-app-gateway-service
   template:
     metadata:
       labels:
-        app: kpress-app-gateway
+        app: kpress-app-gateway-service
     spec:
       containers:
-        - name: kpress-app-gateway
-          image: iru44/kpress-app-gateway:latest
+        - name: kpress-app-gateway-service
+          image: iru44/kpress-app-gateway-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 3030
