@@ -17,7 +17,7 @@ spec:
           image: iru44/kpress-app-frontend:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 5173
           resources:
             limits:
               memory: "512Mi"
