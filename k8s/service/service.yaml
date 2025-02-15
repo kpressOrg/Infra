@@ -1,6 +1,28 @@
 apiVersion: v1
 kind: Service
 metadata:
+  name: kpress-rabbitmq
+spec:
+  selector:
+    app: kpress-rabbitmq
+  ports:
+    - name: metrics
+      protocol: TCP
+      port: 5552
+      targetPort: 5552
+    - name: management
+      protocol: TCP
+      port: 15672
+      targetPort: 15672
+    - name: amqp
+      protocol: TCP
+      port: 5672
+      targetPort: 5672
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: kpress-app-gateway-service
 spec:
   type: LoadBalancer
@@ -8,7 +30,7 @@ spec:
     app: kpress-app-gateway-service
   ports:
     - protocol: TCP
-      port: 8080
+      port: 3030
       targetPort: 3030
 ---
 apiVersion: v1
@@ -21,7 +43,7 @@ spec:
     app: kpress-app-todo-service
   ports:
     - protocol: TCP
-      port: 8081
+      port: 3031
       targetPort: 3031
 ---
 apiVersion: v1
@@ -34,7 +56,7 @@ spec:
     app: kpress-app-post-service
   ports:
     - protocol: TCP
-      port: 8082
+      port: 3032
       targetPort: 3032
 ---
 apiVersion: v1
@@ -47,7 +69,7 @@ spec:
     app: kpress-app-user-service
   ports:
     - protocol: TCP
-      port: 8083
+      port: 3033
       targetPort: 3033
 ---
 apiVersion: v1
@@ -61,7 +83,7 @@ spec:
   ports:
     - protocol: TCP
       port: 5432
-      targetPort: 5433
+      targetPort: 5432
 ---
 apiVersion: v1
 kind: Service
@@ -74,7 +96,7 @@ spec:
   ports:
     - protocol: TCP
       port: 5432
-      targetPort: 5431
+      targetPort: 5432
 ---
 apiVersion: v1
 kind: Service
@@ -83,11 +105,11 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: kpress-db-user
+    app: kpress-db-todo
   ports:
     - protocol: TCP
       port: 5432
-      targetPort: 5434
+      targetPort: 5432
 ---
 apiVersion: v1
 kind: Service
@@ -99,7 +121,7 @@ spec:
     app: kpress-app-frontend
   ports:
     - protocol: TCP
-      port: 80
+      port: 8080
       targetPort: 8080
 ---
 apiVersion: v1

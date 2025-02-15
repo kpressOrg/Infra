@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kpress-rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kpress-rabbitmq
+  template:
+    metadata:
+      labels:
+        app: kpress-rabbitmq
+    spec:
+      containers:
+        - name: kpress-rabbitmq
+          image: rabbitmq:3.13
+          ports:
+            - containerPort: 5552
+            - containerPort: 15672
+            - containerPort: 5672
+          env:
+            - name: RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS
+              value: "-rabbitmq_stream advertised_host localhost"
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - |
+              rabbitmq-plugins enable rabbitmq_stream rabbitmq_stream_management &&
+              rabbitmq-server

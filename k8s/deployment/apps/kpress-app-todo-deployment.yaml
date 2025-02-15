@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: kpress-app-todo-service
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: kpress-app-todo-service
@@ -12,6 +12,13 @@ spec:
       labels:
         app: kpress-app-todo-service
     spec:
+      initContainers:
+        - name: wait-for-db
+          image: busybox
+          command: ['sh', '-c', 'until nc -z kpress-db-todo 5434; do echo waiting for database; sleep 2; done;']
+        - name: wait-for-rabbitmq
+          image: busybox
+          command: ['sh', '-c', 'until nc -z kpress-rabbitmq 5672; do echo waiting for rabbitmq; sleep 2; done;']
       containers:
         - name: kpress-app-todo-service
           image: iru44/kpress-app-todo-service:latest

@@ -22,6 +22,8 @@ spec:
               value: "mypassword"
             - name: POSTGRES_DB
               value: "mydb"
+            - name: PGPORT
+              value: "5433"
           ports:
             - containerPort: 5433
           resources:
