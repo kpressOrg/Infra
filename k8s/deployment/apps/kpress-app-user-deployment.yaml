@@ -16,9 +16,9 @@ spec:
         - name: wait-for-db
           image: busybox
           command: ['sh', '-c', 'until nc -z kpress-db-user 5433; do echo waiting for database; sleep 2; done;']
-        - name: wait-for-rabbitmq
-          image: busybox
-          command: ['sh', '-c', 'until nc -z kpress-rabbitmq 5672; do echo waiting for rabbitmq; sleep 2; done;']
+        # - name: wait-for-rabbitmq
+          # image: busybox
+          # command: ['sh', '-c', 'until nc -z kpress-rabbitmq 5672; do echo waiting for rabbitmq; sleep 2; done;']
       containers:
         - name: kpress-app-user-service
           image: iru44/kpress-app-user-service:latest

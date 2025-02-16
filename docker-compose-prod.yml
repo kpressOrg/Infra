@@ -39,13 +39,16 @@ services:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: mydb
+    expose:
+      - "5431"
     ports:
-      - "5435:5432"
+      - "5431:5431"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb"]
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb -p 5431"]
       interval: 10s
       timeout: 5s
       retries: 5
+    command: ["postgres", "-c", "port=5431"]
 
   kpress-db-todo:
     image: postgres:latest
@@ -54,13 +57,16 @@ services:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: mydb
+    expose:
+      - "5434"
     ports:
-      - "5434:5432"
+      - "5434:5434"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb"]
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb -p 5434"]
       interval: 10s
       timeout: 5s
       retries: 5
+    command: ["postgres", "-c", "port=5434"]
 
   kpress-db-user:
     image: postgres:latest
@@ -69,13 +75,16 @@ services:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: mydb
+    expose:
+      - "5433"
     ports:
-      - "5433:5432"
+      - "5433:5433"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb"]
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb -p 5433"]
       interval: 10s
       timeout: 5s
       retries: 5
+    command: ["postgres", "-c", "port=5433"]
 
   kpress-app-user-service:
     build:
@@ -115,14 +124,14 @@ services:
 
   kpress-app-gateway-service:
     build:
-      context: ./services/gateway
+      context: ../services/gateway
       dockerfile: Dockerfile.prod
     ports:
       - "3030:3030"
 
   kpress-app-frontend:
     build:
-      context: ./frontend
+      context: ../frontend
       dockerfile: Dockerfile.prod
     ports:
       - "5173:5173"
